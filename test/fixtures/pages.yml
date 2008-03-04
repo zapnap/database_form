@@ -1,0 +1,17 @@
+homepage:
+  id: 1
+  title: Ruby Home Page
+  breadcrumb: Home
+  slug: /
+  status_id: 100
+  parent_id:
+  published_at: 2006-01-30 08:41:07 
+contact_form:
+  id: 2
+  title: Contact Form
+  breadcrumb: Contact
+  slug: contact
+  status_id: 100
+  parent_id: 1
+  class_name: DatabaseFormPage
+  published_at: 2006-02-05 08:44:07

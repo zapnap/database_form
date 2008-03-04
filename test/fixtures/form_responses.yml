@@ -1,0 +1,20 @@
+first:
+  name: contact
+  content:
+    email: 'test1@test.net'
+    name: 'nap'
+  created_at: <%= 3.days.ago.to_s :db %>
+
+second:
+  name: contact
+  content: 
+    email: 'test2@test.net'
+    name: 'ian'
+  created_at: <%= 2.days.ago.to_s :db %>
+
+third:
+  name: requestinfo
+  content:
+    email: 'info@request.net'
+    name: 'inforequest'
+  created_at: <%= 2.days.ago.to_s :db %>

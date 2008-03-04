@@ -1,0 +1,100 @@
+= Database Form Extension for Radiant
+
+The Database Form extension enables Radiant users to build form pages that
+will save visitor responses to a database table. Those responses can then
+be exported for consumption in some other application (CRM, etc).
+
+Install the extension, run the rake radiant:extensions:database_form:migrate
+task, and the rake radiant:extensions:database_form:update task. These
+tasks will add the necessary database table to your Radiant installation
+and copy over the JavaScript that's required for client-side validation.
+
+Once you've done this, log into the Radiant admin and set the page type
+of the page where you'll build the form to DatabaseFormPage. Then create
+your form using tags. Here's an example of usage:
+
+    <r:database:form name="requestinfo" redirect_to="/contact/thank-you">
+      Name:<br/>
+      <r:database:text name="name"/><br/>
+      Email:<br/>
+      <r:database:text name="email"/><br/>
+      Primary Interest:<br/>
+      <r:database:select name="primary_interest">
+        <r:database:option name="work"/>
+        <r:database:option name="fun!"/>
+      </r:database:select><br/>
+      <r:database:submit value="Submit"/>
+      <r:database:reset value="Reset"/>
+    </r:database:form>
+
+As shown above, you can use the redirect_to attribute to specify where the
+visitor should be redirected to after submitting the form.
+
+The entire inventory of tags includes:
+
+  <r:database:form name="" redirect_to="" validate="">...</r:database:form>
+  <r:database:text name="" validate=""/>
+  <r:database:password name="" validate=""/>
+  <r:database:checkbox name="" validate=""/>
+  <r:database:hidden name="" validate=""/>
+  <r:database:textarea name="" validate=""/>
+  <r:database:radio name="" validate=""/>
+  <r:database:radiogroup name="" validate="">...</r:database:radiogroup>
+  <r:database:select name="" validate="">...</r:database:select>
+  <r:database:option name=""/>
+  <r:database:us_states/>
+  <r:database:ca_provinces/>
+  <r:database:countries/>
+  <r:database:submit/>
+  <r:database:reset/>
+  
+Note that most tags support client-side validation. Thanks to Andrew Tetlaw
+for his spiffy Prototype-based validation JavaScript. If you wish to include
+validation in your form, you must set the validate attribute in the form tag.
+You can then choose from a variety of validation routines for the form
+elements, including: required, validate-number, validate-digits, 
+validate-alpha, validate-alphanum, validate-date, validate-email,
+validate-url, validate-currency-dollar, validate-selection, and
+validate-one-required. You'll also need to include prototype in your layout,
+of course (IMPORTANT; without it validation won't work).
+
+<r:database:form name="contact" validate="true">
+  <r:database:text name="name" validate="required"/>
+  <r:database:text name="email" validate="required validate-email"/>
+</r:database:form>
+
+If you care to, you can style these validations using CSS:
+
+input.validation-failed, textarea.validation-failed {
+        border: 1px solid #900;
+        color: #900;
+}
+.validation-advice {
+        margin: 5px 0;
+        padding: 5px;
+        background-color: #900;
+        color: #FFF;
+        font-weight: bold;
+}
+
+The Database Forms extension also adds a tab to Radiant's admin
+interface which can be used to export user form data. You can select
+by form name (the name you assigned to a form in its tag) and date
+ranges. XML is the only supported export format at this time.
+
+Maybe we'll sexy this up some day and make listings browsable through
+the admin but the most common use case is probably exporting data, and
+that's what we needed at the time, so it is what it is. If you'd like
+to extend it, we definitely welcome submissions.
+
+This extension is based on the Mailer extension by Matt McCray and 
+(originally) Sean Cribbs. It was inspired by a post on SuperGloo's blog
+http://code.supergloo.com/2007/12/12/radiant-cms-database-form-extension
+but should be a bit more flexible than what was described there,
+allowing you to add arbitrary forms at will without adding database 
+tables (model attributes for the FormResponse model are serialized
+and stored in a content text area).
+
+Tested on Radiant 0.6.4
+
+http://ubikorp.com/projects
