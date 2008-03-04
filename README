@@ -95,6 +95,10 @@ allowing you to add arbitrary forms at will without adding database
 tables (model attributes for the FormResponse model are serialized
 and stored in a content text area).
 
-Tested on Radiant 0.6.4
+Developed by Nick Plante for Ubikorp Internet Services. 
+Tested on Radiant 0.6.4.
 
-http://ubikorp.com/projects
+http://github.com/zapnap/database_form
+
+http://blog.zerosum.org
+http://www.ubikorp.com
