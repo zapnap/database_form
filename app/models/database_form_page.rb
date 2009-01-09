@@ -20,7 +20,7 @@ class DatabaseFormPage < Page
       redirect_to = request.parameters[:redirect_to]
 
       if save_form and redirect_to
-        response.redirect(redirect_to)
+        response.redirect(redirect_to, '302')
       else
         super(request, response) 
       end
